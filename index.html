@@ -9,6 +9,40 @@
 </head>
 <body>
     <h1>Coding Quiz</h1>
+    <span id="timer"><span id="time_left"></span> seconds remaining</span>
+    
+    <!--Opening page-->
+    <section id="opening" class="">
+        <h2>Opening</h2>
+        <button id="start_quiz">Start Quiz</button>
+    </section>
+
+    <!--Question 1-->
+    <section id="question1" class="hidden" data-question="1">
+        <h2>Question 1</h2>
+        <button class="true">True</button>
+        <button>False</button>
+    </section>
+
+    <!--Question 2-->
+    <section id="question2" class="hidden" data-question="2">
+        <h2>Question 1</h2>
+        <button class="true">True</button>
+        <button>False</button>
+    </section>
+
+    <!--End game screen-->
+    <section id="endgame" class="hidden">
+        <h2>Your game is over</h2>
+        <input type="text" />
+        <button>Submit</button>
+    </section>
+
+    <!--High Scores-->
+    <section id="highscores" class="hidden">
+        <h2>High Scores</h2>
+    </section>
+
     <script src="assets/scripts/script.js"></script>
 </body>
 </html>
