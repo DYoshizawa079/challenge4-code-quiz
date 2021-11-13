@@ -5,12 +5,14 @@ var elemSecs = document.querySelectorAll("section");
 var elemSecOpening = document.querySelector("#opening");
 var elemSecCurrentQ;
 
+// Counter to show what question is being answered
+var questionCounter = 1;
+
 // Set initial value of countdown timer
 var timeLeft = 30;
 
 // Show a selected <Sec> element and hide the other <Sec> elements
 var showSecs = function (show) { // Parameter accepts an element selector
-    console.dir(elemSecs);
     for (var i = 0; i < elemSecs.length; i++) {
         elemSecs[i].className = "hidden";
     }
@@ -21,22 +23,35 @@ var checkAnswer = function(event) {
     var btnClass = event.target.getAttribute("class");
     if (btnClass === "true") {
         alert("correct answer");
-
+        questionCounter++;
+        console.log("questionCounter " + questionCounter);
     } else {
         alert("wrong answer");
+        timeLeft = timeLeft - 5; // Penalize player by decreasing time left by 5 seconds
     }
 }
 
 // Display each quiz question
 var showQuestions = function() {
 
-    var questionCounter = 1;
-    var elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
-    elemSecCurrentQ = document.querySelector(elemSecCurrentQName);
+    var elemSecCurrentQName;
     
-    showSecs(elemSecCurrentQName);
-
-    document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    if (questionCounter === 1) {
+        elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+        showSecs(elemSecCurrentQName);
+        document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    } else if (questionCounter === 2) {
+        elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+        showSecs(elemSecCurrentQName);
+        document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    } else if (questionCounter === 3) {
+        elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+        showSecs(elemSecCurrentQName);
+        document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    } else {
+        endGame();
+    }
+    console.log("questionCounter 2 " + questionCounter);
 
 }
 
