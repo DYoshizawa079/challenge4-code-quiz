@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Coding Quiz</h1>
-    <span id="timer"><span id="time_left"></span> seconds remaining</span>
+    <p id="timer"><span id="time_left"></span> seconds remaining</p>
     
     <!--Opening page-->
     <section id="opening" class="">
@@ -41,14 +41,19 @@
     <!--End game screen-->
     <section id="endgame" class="hidden">
         <h2>Your game is over</h2>
-        <input type="text" />
-        <button>Submit</button>
+        <p>Your score is <span id="score"></span></p>
+        <p>Enter your name here</p>
+        <input id="name" type="text" />
+        <button id="score_submit">Submit</button>
     </section>
 
     <!--High Scores-->
     <section id="highscores" class="hidden">
         <h2>High Scores</h2>
+        <button id="restart">Start over</button>
     </section>
+
+    <p id="answer_display"></p>
 
     <script src="assets/scripts/script.js"></script>
 </body>

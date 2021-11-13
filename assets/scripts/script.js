@@ -1,17 +1,28 @@
 
-// Load HTML elements
+// Variables for loading HTML elements
 var elemStartBtn = document.querySelector("#start_quiz"); // The 'Start quiz' button
 var elemSecs = document.querySelectorAll("section");
 var elemSecOpening = document.querySelector("#opening");
 var elemSecCurrentQ;
+var elemAnswerDisp = document.querySelector("#answer_display");
+var elemScoreDisp = document.querySelector("#score");
+var elemSubmitBtn = document.querySelector("#score_submit");
+var elemRestartBtn = document.querySelector("#restart");
 
 // Counter to show what question is being answered
 var questionCounter = 1;
 
+// For recording your score 
+var highScores = [];
+var yourScore = {
+    name: "",
+    score: 0
+}
+
 // Set initial value of countdown timer
 var timeLeft = 30;
 
-// Show a selected <Sec> element and hide the other <Sec> elements
+// Show a selected <section> element and hide the other <section> elements
 var showSecs = function (show) { // Parameter accepts an element selector
     for (var i = 0; i < elemSecs.length; i++) {
         elemSecs[i].className = "hidden";
@@ -19,14 +30,17 @@ var showSecs = function (show) { // Parameter accepts an element selector
     document.querySelector(show).setAttribute("class","");
 }
 
+// Check whether the player selected the correct answer
 var checkAnswer = function(event) {
     var btnClass = event.target.getAttribute("class");
     if (btnClass === "true") {
-        alert("correct answer");
-        questionCounter++;
-        console.log("questionCounter " + questionCounter);
+        elemAnswerDisp.textContent = "Correct";
+        setTimeout (function(){
+            elemAnswerDisp.textContent = "";
+        }, 1000);
+        questionCounter++; // To advance him to the next question
     } else {
-        alert("wrong answer");
+        elemAnswerDisp.textContent = "Wrong";
         timeLeft = timeLeft - 5; // Penalize player by decreasing time left by 5 seconds
     }
 }
@@ -51,7 +65,7 @@ var showQuestions = function() {
     } else {
         endGame();
     }
-    console.log("questionCounter 2 " + questionCounter);
+    console.log("questionCounter " + questionCounter);
 
 }
 
@@ -67,12 +81,47 @@ var runGame = function() {
         timeLeftDisplay.textContent = timeLeft;
 
         // Run the end game function once timer hits a set value
-        if (timeLeft === 20) {
+        if (timeLeft < 20) {
             endGame();
         } else {
             showQuestions();
         }
     }, 1000);
+}
+
+// Display scores
+var displayScores = function() {
+
+    console.log("high scores is");
+    
+
+    // Reset the quiz
+    elemRestartBtn.addEventListener("click", function() {
+        showSecs("#opening");
+        timeLeft = 30;
+        questionCounter = 1;
+    })
+}
+
+var recordScore = function (event) {
+    event.preventDefault();
+    console.log(event);
+    yourScore.name = document.querySelector("#name").value;
+    yourScore.score = timeLeft;
+
+    highScores = localStorage.getItem("high_scores");
+    highScores = JSON.parse(highScores);
+    if (highScores === null) {
+       highScores = [];
+    }
+    highScores.push(yourScore);
+    localStorage.setItem("high_scores", JSON.stringify(highScores));
+    console.log(highScores);
+
+    showSecs("#highscores");
+    document.querySelector("#name").value = "";
+
+    displayScores();
 }
 
 // End Game function
@@ -82,6 +131,13 @@ var endGame = function () {
 
     // Hide all <Sec>, except for the one that displays the current question
     showSecs("#endgame");
+
+    elemScoreDisp.textContent = timeLeft;
+
+    elemSubmitBtn.addEventListener("click",recordScore);
+
+    highScores = [];
+
 }
 
 elemStartBtn.addEventListener('click', runGame);
