@@ -8,6 +8,7 @@ var elemAnswerDisp = document.querySelector("#answer_display");
 var elemScoreDisp = document.querySelector("#score");
 var elemSubmitBtn = document.querySelector("#score_submit");
 var elemRestartBtn = document.querySelector("#restart");
+var elemHighScores = document.querySelector("#highscores_list");
 
 // Counter to show what question is being answered
 var questionCounter = 1;
@@ -92,8 +93,13 @@ var runGame = function() {
 // Display scores
 var displayScores = function() {
 
-    console.log("high scores is");
-    
+    for (var i=0; i < highScores.length; i++) {
+        var elemHighScoresItem = document.createElement("li");
+        var scoreName = highScores[i].name;
+        var scoreScore = highScores[i].score;
+        elemHighScoresItem.textContent = scoreName + " - " + scoreScore;
+        elemHighScores.appendChild(elemHighScoresItem);
+    }
 
     // Reset the quiz
     elemRestartBtn.addEventListener("click", function() {
