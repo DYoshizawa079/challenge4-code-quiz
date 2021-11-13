@@ -1,30 +1,41 @@
-console.log("Script loaded");
 
 // Load HTML elements
 var elemStartBtn = document.querySelector("#start_quiz"); // The 'Start quiz' button
-var elemSections = document.querySelectorAll("section");
-var elemSectionOpening = document.querySelector("#opening");
+var elemSecs = document.querySelectorAll("Sec");
+var elemSecOpening = document.querySelector("#opening");
+var elemSecCurrentQ;
 
 // Set initial value of countdown timer
 var timeLeft = 30;
 
-// Show a selected <section> element and hide the other <section> elements
-var showSections = function (show) { // Parameter accepts an element selector
-    for (var i = 0; i < elemSections.length; i++) {
-        elemSections[i].className = "hidden";
+// Show a selected <Sec> element and hide the other <Sec> elements
+var showSecs = function (show) { // Parameter accepts an element selector
+    for (var i = 0; i < elemSecs.length; i++) {
+        elemSecs[i].className = "hidden";
     }
     document.querySelector(show).setAttribute("class","");
-    console.dir(elemSections[0]);
+}
+
+var checkAnswer = function(event) {
+    var btnClass = event.target.getAttribute("class");
+    if (btnClass === "true") {
+        alert("correct answer");
+
+    } else {
+        alert("wrong answer");
+    }
 }
 
 // Display each quiz question
 var showQuestions = function() {
 
     var questionCounter = 1;
-    var elemSectionCurrentQ = "section[data-question='" + questionCounter + "']";
-    showSections(elemSectionCurrentQ);
+    var elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+    elemSecCurrentQ = document.querySelector(elemSecCurrentQName);
+    
+    showSecs(elemSecCurrentQName);
 
-    //elemSections[questionCounter].addEventListener('click', alert('asf'));
+    document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
 
 }
 
@@ -32,8 +43,7 @@ var showQuestions = function() {
 var runCountdown;
 var runGame = function() {
 
-    elemSectionOpening.setAttribute("class", "hidden");
-    //console.log(elemSectionOpening);
+    elemSecOpening.setAttribute("class", "hidden");
 
     runCountdown = setInterval(function() {
         --timeLeft;
@@ -54,9 +64,8 @@ var endGame = function () {
     clearInterval(runCountdown);
     console.log("Timer expired");
 
-    // Hide all <section>, except for the one that displays the current question
-    showSections("#endgame");
+    // Hide all <Sec>, except for the one that displays the current question
+    showSecs("#endgame");
 }
 
 elemStartBtn.addEventListener('click', runGame);
-
