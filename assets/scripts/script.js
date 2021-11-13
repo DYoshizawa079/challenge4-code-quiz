@@ -1,7 +1,7 @@
 
 // Load HTML elements
 var elemStartBtn = document.querySelector("#start_quiz"); // The 'Start quiz' button
-var elemSecs = document.querySelectorAll("Sec");
+var elemSecs = document.querySelectorAll("section");
 var elemSecOpening = document.querySelector("#opening");
 var elemSecCurrentQ;
 
@@ -10,6 +10,7 @@ var timeLeft = 30;
 
 // Show a selected <Sec> element and hide the other <Sec> elements
 var showSecs = function (show) { // Parameter accepts an element selector
+    console.dir(elemSecs);
     for (var i = 0; i < elemSecs.length; i++) {
         elemSecs[i].className = "hidden";
     }
