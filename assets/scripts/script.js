@@ -9,6 +9,7 @@ var elemScoreDisp = document.querySelector("#score");
 var elemSubmitBtn = document.querySelector("#score_submit");
 var elemRestartBtn = document.querySelector("#restart");
 var elemHighScores = document.querySelector("#highscores_list");
+var elemViewHighScores = document.querySelector("#view_highscores");
 
 // Counter to show what question is being answered
 var questionCounter = 1;
@@ -70,6 +71,36 @@ var showQuestions = function() {
 
 }
 
+// Display scores
+var displayScores = function() {
+
+    elemHighScores.innerHTML = "";
+
+    for (var i=0; i < highScores.length; i++) {
+        var elemHighScoresItem = document.createElement("li");
+        var scoreName = highScores[i].name;
+        var scoreScore = highScores[i].score;
+        elemHighScoresItem.textContent = scoreName + " - " + scoreScore;
+        elemHighScores.appendChild(elemHighScoresItem);
+    }
+
+    // Reset the quiz
+    elemRestartBtn.addEventListener("click", function() {
+        showSecs("#opening");
+        timeLeft = 30;
+        questionCounter = 1;
+    })
+}
+
+// Skip to the "View High Scores" panel
+var viewHighScores = function() {
+    clearInterval(runCountdown);
+    console.log("Timer expired");
+    getHighScore();
+    displayScores();
+    showSecs("#highscores");
+}
+
 // Run the game until countdown timer hits zero
 var runCountdown;
 var runGame = function() {
@@ -90,33 +121,20 @@ var runGame = function() {
     }, 1000);
 }
 
-// Display scores
-var displayScores = function() {
-
-    for (var i=0; i < highScores.length; i++) {
-        var elemHighScoresItem = document.createElement("li");
-        var scoreName = highScores[i].name;
-        var scoreScore = highScores[i].score;
-        elemHighScoresItem.textContent = scoreName + " - " + scoreScore;
-        elemHighScores.appendChild(elemHighScoresItem);
-    }
-
-    // Reset the quiz
-    elemRestartBtn.addEventListener("click", function() {
-        showSecs("#opening");
-        timeLeft = 30;
-        questionCounter = 1;
-    })
+// Get existing high score info
+var getHighScore = function() {
+    highScores = localStorage.getItem("high_scores");
+    highScores = JSON.parse(highScores);
 }
 
+// Recored your current score
 var recordScore = function (event) {
     event.preventDefault();
     console.log(event);
     yourScore.name = document.querySelector("#name").value;
     yourScore.score = timeLeft;
-
-    highScores = localStorage.getItem("high_scores");
-    highScores = JSON.parse(highScores);
+    getHighScore();
+    
     if (highScores === null) {
        highScores = [];
     }
@@ -147,3 +165,4 @@ var endGame = function () {
 }
 
 elemStartBtn.addEventListener('click', runGame);
+elemViewHighScores.addEventListener('click', viewHighScores);
