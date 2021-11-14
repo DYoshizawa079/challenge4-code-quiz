@@ -10,6 +10,7 @@ var elemSubmitBtn = document.querySelector("#score_submit");
 var elemRestartBtn = document.querySelector("#restart");
 var elemHighScores = document.querySelector("#highscores_list");
 var elemViewHighScores = document.querySelector("#view_highscores");
+var elemClearHighScore = document.querySelector("#clear_scores");
 
 // Counter to show what question is being answered
 var questionCounter = 1;
@@ -83,12 +84,14 @@ var displayScores = function() {
 
     elemHighScores.innerHTML = "";
 
-    for (var i=0; i < highScores.length; i++) {
-        var elemHighScoresItem = document.createElement("li");
-        var scoreName = highScores[i].name;
-        var scoreScore = highScores[i].score;
-        elemHighScoresItem.textContent = scoreName + " - " + scoreScore;
-        elemHighScores.appendChild(elemHighScoresItem);
+    if (highScores !== null) {
+        for (var i=0; i < highScores.length; i++) {
+            var elemHighScoresItem = document.createElement("li");
+            var scoreName = highScores[i].name;
+            var scoreScore = highScores[i].score;
+            elemHighScoresItem.textContent = scoreName + " - " + scoreScore;
+            elemHighScores.appendChild(elemHighScoresItem);
+        }
     }
 
     // Reset the quiz
@@ -102,9 +105,9 @@ var displayScores = function() {
 // Skip to the "View High Scores" panel
 var viewHighScores = function() {
     clearInterval(runCountdown);
-    console.log("Timer expired");
     getHighScore();
     displayScores();
+    
     showSecs("#highscores");
 }
 
@@ -132,6 +135,7 @@ var runGame = function() {
 var getHighScore = function() {
     highScores = localStorage.getItem("high_scores");
     highScores = JSON.parse(highScores);
+    console.log(highScores);
 }
 
 // Recored your current score
@@ -168,5 +172,13 @@ var endGame = function () {
 
 }
 
+// Clear High Scores
+var clearHighScores = function(){
+    localStorage.removeItem("high_scores");
+    console.log(highScores);
+    elemHighScores.innerHTML = "";
+}
+
 elemStartBtn.addEventListener('click', runGame);
 elemViewHighScores.addEventListener('click', viewHighScores);
+elemClearHighScore.addEventListener('click',clearHighScores);

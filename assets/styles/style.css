@@ -94,9 +94,12 @@ header {
     text-align: left;
     width: 100%;
     margin-bottom:20px;
-    background-color:#a38bd3;
-    padding: 20px 40px;
+    background-color:#a598bb;
+    padding: 0px 40px;
     box-sizing: border-box;
+}
+#highscores li {
+    padding:10px;
 }
 
 /* Footer */
