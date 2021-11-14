@@ -1,4 +1,3 @@
-
 // Variables for loading HTML elements
 var elemStartBtn = document.querySelector("#start_quiz"); // The 'Start quiz' button
 var elemSecs = document.querySelectorAll("section");
@@ -107,7 +106,6 @@ var viewHighScores = function() {
     clearInterval(runCountdown);
     getHighScore();
     displayScores();
-    
     showSecs("#highscores");
 }
 
@@ -123,7 +121,7 @@ var runGame = function() {
         timeLeftDisplay.textContent = timeLeft;
 
         // Run the end game function once timer hits a set value
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
             endGame();
         } else {
             showQuestions();
@@ -172,10 +170,9 @@ var endGame = function () {
 
 }
 
-// Clear High Scores
+// Clear High Scores List
 var clearHighScores = function(){
     localStorage.removeItem("high_scores");
-    console.log(highScores);
     elemHighScores.innerHTML = "";
 }
 
