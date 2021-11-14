@@ -1,3 +1,8 @@
+:root {
+    --primary-color:#3d00b8;
+    --primary-color-activated:#5a14e9;
+    --secondary-color:#999999;
+}
 body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size:16px;
@@ -8,19 +13,22 @@ h1 {
 h2 {
     font-size: 30px;
 }
+a {
+    color:var(--primary-color);
+}
+a:hover {
+    color:var(--primary-color-activated);
+}
 section {
-    border: solid 1px#999999;
-    background-color: #999999;
     display: block;
     width: 900px;
     margin: 0 auto 20px;
     display:flex;
     flex-direction: column;
     justify-content: center;
-    height:60vh;
+    min-height:60vh;
 }
 section.hidden {
-    background-color: #ffffff;
     display: none;
 }
 section div {
@@ -31,10 +39,13 @@ button {
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    background-color: #000000;
+    background-color:var(--primary-color);
     color: #ffffff;
     display:block;
     margin-bottom:10px;
+}
+button:hover {
+    background-color: var(--primary-color-activated);
 }
 
 /* Header items */
@@ -50,22 +61,19 @@ header {
     margin:16px;
 }
 
+/* Opening page/panel */
 #opening {
     text-align: center;
 }
 #opening button {
     display:inline;
 }
+
+/* Endgame page/panel */
 #endgame {
     text-align: center;
 }
 #endgame button {
-    display:inline;
-}
-#highscores {
-    text-align: center;
-}
-#highscores button {
     display:inline;
 }
 #name {
@@ -73,16 +81,36 @@ header {
     padding: 8px;
     border-radius: 10px;
     width: 250px;
-    border: solid 1px #999999;
+    border: solid 1px var(--secondary-color);
+}
+
+/* High Scores page/panel */
+#highscores {
+    text-align: center;
+}
+#highscores button {
+    display:inline;
 }
 #highscores ul {
     text-align:left;
     width:300px;
     margin:0 auto 20px;
 }
+
+/* Footer */
 footer {
-    border-top:solid 1px #999999;
+    border-top:solid 1px var(--secondary-color);
     height:10vh;
     width: 900px;
     margin: 0 auto;
+}
+
+/* If width of screen is less than 900px */
+@media screen and (max-width: 900px) {
+    section {
+        width:90%;
+    }
+    footer {
+        width:90%;
+    }
 }
