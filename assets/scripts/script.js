@@ -27,9 +27,9 @@ var timeLeft = 20;
 // Show a selected <section> element and hide the other <section> elements
 var showSecs = function (show) { // Parameter accepts an element selector
     for (var i = 0; i < elemSecs.length; i++) {
-        elemSecs[i].className = "hidden";
+        elemSecs[i].setAttribute("data-visibility","hidden");
     }
-    document.querySelector(show).setAttribute("class","");
+    document.querySelector(show).setAttribute("data-visibility","");
 }
 
 // Check whether the player selected the correct answer
