@@ -76,31 +76,27 @@ header {
 }
 
 /* Endgame page/panel */
-#endgame {
-    text-align: center;
-}
 #endgame button {
     display:inline;
 }
 #name {
     font-size: 16px;
     padding: 8px;
-    border-radius: 10px;
     width: 250px;
     border: solid 1px var(--secondary-color);
 }
 
 /* High Scores page/panel */
-#highscores {
-    text-align: center;
-}
 #highscores button {
     display:inline;
 }
-#highscores ul {
-    text-align:left;
-    width:300px;
-    margin:0 auto 20px;
+#highscores ol {
+    text-align: left;
+    width: 100%;
+    margin-bottom:20px;
+    background-color:#a38bd3;
+    padding: 20px 40px;
+    box-sizing: border-box;
 }
 
 /* Footer */
