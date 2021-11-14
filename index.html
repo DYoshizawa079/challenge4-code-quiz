@@ -8,55 +8,71 @@
     <link rel="stylesheet" href="assets/styles/style.css" />
 </head>
 <body>
-    <h1>Coding Quiz</h1>
-    <p id="timer"><span id="time_left"></span> seconds remaining</p>
-    <a href="#" id="view_highscores">View High Scores</a>
-    
+    <header>
+        <a href="#" id="view_highscores">View High Scores</a>
+        <p id="timer"><span id="time_left"></span> seconds remaining</p>
+    </header>
+
     <!--Opening page-->
     <section id="opening" class="">
-        <h2>Opening</h2>
-        <button id="start_quiz">Start Quiz</button>
+        <div>
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <button id="start_quiz">Start Quiz</button>
+        </div>
     </section>
 
     <!--Question 1-->
     <section id="question1" class="hidden" data-question="1">
-        <h2>Question 1</h2>
-        <button class="true">True</button>
-        <button>False</button>
+        <div>
+            <h2>Question 1</h2>
+            <button class="true">True</button>
+            <button>False</button>
+        </div>
     </section>
 
     <!--Question 2-->
     <section id="question2" class="hidden" data-question="2">
-        <h2>Question 2</h2>
-        <button class="true">True</button>
-        <button>False</button>
+        <div>
+            <h2>Question 2</h2>
+            <button class="true">True</button>
+            <button>False</button>
+        </div>
     </section>
 
     <!--Question 3-->
     <section id="question3" class="hidden" data-question="3">
-        <h2>Question 3</h2>
-        <button class="true">True</button>
-        <button>False</button>
+        <div>
+            <h2>Question 3</h2>
+            <button class="true">True</button>
+            <button>False</button>
+        </div>
     </section>
 
     <!--End game screen-->
     <section id="endgame" class="hidden">
-        <h2>Your game is over</h2>
-        <p>Your score is <span id="score"></span></p>
-        <p>Enter your name here</p>
-        <input id="name" type="text" />
-        <button id="score_submit">Submit</button>
+        <div>
+            <h2>Your game is over</h2>
+            <p>Your score is <span id="score"></span></p>
+            <p>Enter your name here</p>
+            <input id="name" type="text" />
+            <button id="score_submit">Submit</button>
+        </div>
     </section>
 
     <!--High Scores-->
     <section id="highscores" class="hidden">
-        <h2>High Scores</h2>
-        <ul id="highscores_list">
-        </ul>
-        <button id="restart">Start over</button>
+        <div>
+            <h2>High Scores</h2>
+            <ul id="highscores_list">
+            </ul>
+            <button id="restart">Start over</button>
+        </div>
     </section>
 
-    <p id="answer_display"></p>
+    <footer>
+        <p id="answer_display"></p>
+    </footer>
 
     <script src="assets/scripts/script.js"></script>
 </body>

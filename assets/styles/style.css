@@ -1,7 +1,88 @@
+body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:16px;
+}
+h1 {
+    font-size:40px;
+}
+h2 {
+    font-size: 30px;
+}
 section {
-    border:solid 1px #999;
-    background-color: #999;
+    border: solid 1px#999999;
+    background-color: #999999;
+    display: block;
+    width: 900px;
+    margin: 0 auto 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:60vh;
 }
 section.hidden {
-    background-color: #fff;
+    background-color: #ffffff;
+    display: none;
+}
+section div {
+    align-items: center;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    display:block;
+    margin-bottom:10px;
+}
+
+/* Header items */
+header {
+    height:10vh;
+}
+#view_highscores {
+    float:left;
+    margin:16px;
+}
+#timer {
+    float:right;
+    margin:16px;
+}
+
+#opening {
+    text-align: center;
+}
+#opening button {
+    display:inline;
+}
+#endgame {
+    text-align: center;
+}
+#endgame button {
+    display:inline;
+}
+#highscores {
+    text-align: center;
+}
+#highscores button {
+    display:inline;
+}
+#name {
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
+    width: 250px;
+    border: solid 1px #999999;
+}
+#highscores ul {
+    text-align:left;
+    width:300px;
+    margin:0 auto 20px;
+}
+footer {
+    border-top:solid 1px #999999;
+    height:10vh;
+    width: 900px;
+    margin: 0 auto;
 }
