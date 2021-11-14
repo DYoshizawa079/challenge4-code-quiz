@@ -22,7 +22,7 @@ var yourScore = {
 }
 
 // Set initial value of countdown timer
-var timeLeft = 30;
+var timeLeft = 20;
 
 // Show a selected <section> element and hide the other <section> elements
 var showSecs = function (show) { // Parameter accepts an element selector
@@ -43,7 +43,7 @@ var checkAnswer = function(event) {
         questionCounter++; // To advance him to the next question
     } else {
         elemAnswerDisp.textContent = "Wrong";
-        timeLeft = timeLeft - 5; // Penalize player by decreasing time left by 5 seconds
+        timeLeft = timeLeft - 10; // Penalize player by decreasing time left by 10 seconds
     }
 }
 
@@ -64,10 +64,17 @@ var showQuestions = function() {
         elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
         showSecs(elemSecCurrentQName);
         document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    } else if (questionCounter === 4) {
+        elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+        showSecs(elemSecCurrentQName);
+        document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
+    } else if (questionCounter === 5) {
+        elemSecCurrentQName = "section[data-question='" + questionCounter + "']";
+        showSecs(elemSecCurrentQName);
+        document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
     } else {
         endGame();
     }
-    console.log("questionCounter " + questionCounter);
 
 }
 
@@ -87,7 +94,7 @@ var displayScores = function() {
     // Reset the quiz
     elemRestartBtn.addEventListener("click", function() {
         showSecs("#opening");
-        timeLeft = 30;
+        timeLeft = 20;
         questionCounter = 1;
     })
 }
@@ -113,7 +120,7 @@ var runGame = function() {
         timeLeftDisplay.textContent = timeLeft;
 
         // Run the end game function once timer hits a set value
-        if (timeLeft < 20) {
+        if (timeLeft === 0) {
             endGame();
         } else {
             showQuestions();
@@ -130,7 +137,6 @@ var getHighScore = function() {
 // Recored your current score
 var recordScore = function (event) {
     event.preventDefault();
-    console.log(event);
     yourScore.name = document.querySelector("#name").value;
     yourScore.score = timeLeft;
     getHighScore();
@@ -140,7 +146,6 @@ var recordScore = function (event) {
     }
     highScores.push(yourScore);
     localStorage.setItem("high_scores", JSON.stringify(highScores));
-    console.log(highScores);
 
     showSecs("#highscores");
     document.querySelector("#name").value = "";
@@ -151,7 +156,6 @@ var recordScore = function (event) {
 // End Game function
 var endGame = function () {
     clearInterval(runCountdown);
-    console.log("Timer expired");
 
     // Hide all <Sec>, except for the one that displays the current question
     showSecs("#endgame");
