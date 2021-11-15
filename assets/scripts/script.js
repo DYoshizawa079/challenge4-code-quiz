@@ -1,8 +1,13 @@
 // Variables for HTML elements
 var elemSecs = document.querySelectorAll("section");
-var elemSecCurrentQ;
 var elemAnswerDisp = document.querySelector("#answer_display");
 var elemHighScores = document.querySelector("#highscores_list");
+var elemSecQuestions = document.querySelectorAll(".question");
+
+// Set initial value of countdown timer
+var initialCountdownValue = 60;
+// Used to display the actual time left for the player
+var timeLeft = initialCountdownValue;
 
 // Counter to show what question is being answered
 var questionCounter = 1;
@@ -13,11 +18,6 @@ var yourScore = {
     name: "",
     score: 0
 }
-
-// Set initial value of countdown timer
-var initialCountdownValue = 30;
-// Used to display the actual time left for the player
-var timeLeft = initialCountdownValue;
 
 ///////////////////////////////// FUNCTIONS /////////////////////////////////
 
@@ -53,17 +53,10 @@ var showQuestionPages = function() {
         showSection(elemSecCurrentQName);
         document.querySelector(elemSecCurrentQName).addEventListener('click', checkAnswer);
     }
-    if (questionCounter === 1) { // For question1 
-        showQuestion(1);
-    } else if (questionCounter === 2) { // For question2
-        showQuestion(2);
-    } else if (questionCounter === 3) { // and so on...
-        showQuestion(3);
-    } else if (questionCounter === 4) {
-        showQuestion(4);
-    } else if (questionCounter === 5) {
-        showQuestion(5);
-    } else { // If all questions have been answered
+
+    if (questionCounter <= elemSecQuestions.length) {
+        showQuestion(questionCounter);
+    } else {
         endGame();
     }
 
@@ -124,7 +117,6 @@ var runGame = function() {
 var getHighScore = function() {
     highScores = localStorage.getItem("high_scores");
     highScores = JSON.parse(highScores);
-    console.log(highScores);
 }
 
 // Recored your current score
@@ -146,7 +138,7 @@ var recordScore = function (event) {
     displayScores();
 }
 
-// End Game function
+// End Game function. Get user's initials and record his score if he requests it.
 var endGame = function () {
     clearInterval(runCountdown);
 
@@ -156,7 +148,6 @@ var endGame = function () {
     document.querySelector("#score").textContent = timeLeft;
     document.querySelector("#score_submit").addEventListener("click",recordScore);
     highScores = []; // It seems that failing to have this causes high score displays to duplicate
-
 }
 
 // Clear the 'High Scores' List
