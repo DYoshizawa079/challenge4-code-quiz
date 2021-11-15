@@ -9,7 +9,7 @@ var initialCountdownValue = 60;
 // Used to display the actual time left for the player
 var timeLeft = initialCountdownValue;
 
-// Counter to show what question is being answered
+// Counter to tell the browser what question to display
 var questionCounter = 1;
 
 // For recording your score 
